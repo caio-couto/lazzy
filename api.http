@@ -13,6 +13,14 @@ GET {{host}}/healthcheck
 Content-Type: {{contentType}}
 
 ###
+GET {{baseUrl}}/todos
+Content-Type:  {{contentType}}
+
+###
+GET {{baseUrl}}/todos/123
+Content-Type:  {{contentType}}
+
+###
 POST {{baseUrl}}/todos
 Content-Type:  {{contentType}}
 
@@ -20,14 +28,6 @@ Content-Type:  {{contentType}}
   "task": "task to do",
   "description": "aqui vai uma descrição"
 }
-
-###
-GET {{baseUrl}}/todos
-Content-Type:  {{contentType}}
-
-###
-GET {{baseUrl}}/todos/123
-Content-Type:  {{contentType}}
 
 ###
 PATCH  {{baseUrl}}/todos/b8192f63-2037-4e50-bbe3-2a3e27e8ef84
