@@ -1,0 +1,43 @@
+@host = http://localhost:4545
+
+@baseUrl = {{host}}/api/v1
+
+@contentType = application/json
+
+###
+GET {{host}}
+Content-Type: {{contentType}}
+
+###
+GET {{host}}/healthcheck
+Content-Type: {{contentType}}
+
+###
+POST {{baseUrl}}/todos
+Content-Type:  {{contentType}}
+
+{
+  "task": "task to do",
+  "description": "aqui vai uma descrição"
+}
+
+###
+GET {{baseUrl}}/todos
+Content-Type:  {{contentType}}
+
+###
+GET {{baseUrl}}/todos/123
+Content-Type:  {{contentType}}
+
+###
+PATCH  {{baseUrl}}/todos/b8192f63-2037-4e50-bbe3-2a3e27e8ef84
+Content-Type:  {{contentType}}
+
+{
+  "task": "mudar task to do",
+  "description": "aqui vai outra descrição"
+}
+
+###
+DELETE  {{baseUrl}}/todos/b8192f63-2037-4e50-bbe3-2a3e27e8ef84
+Content-Type:  {{contentType}}

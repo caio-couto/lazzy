@@ -1,0 +1,46 @@
+{
+  "name": "lazzy",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "start:dev": "tsx --watch src/index.ts",
+    "build": "rimraf dist && tsup src/index.ts --format cjs,esm --dts --minify",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:studio": "drizzle-kit studio"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0",
+    "express": "^4.21.0",
+    "helmet": "^8.0.0",
+    "pg": "^8.11.3",
+    "rimraf": "^6.0.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.2.10",
+    "@faker-js/faker": "^9.0.3",
+    "@types/body-parser": "^1.19.5",
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/helmet": "^0.0.48",
+    "@types/k6": "^0.54.1",
+    "@types/node": "^22.7.4",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.24.2",
+    "pino": "^9.4.0",
+    "pino-http": "^10.3.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}
