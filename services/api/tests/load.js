@@ -15,7 +15,7 @@ export const options = {
 };
 
 export default function () {
-  const BASE_URL = `http://localhost:4545`;
+  const BASE_URL = `http://lazzy-dev-571511097.us-east-1.elb.amazonaws.com/`;
   const headers = { "Content-Type": "application/json" };
   const payload = JSON.stringify({
     task: randomString(20),

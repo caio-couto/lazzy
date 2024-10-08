@@ -1,0 +1,33 @@
+services:
+  app:
+    image: aws-ecs-fargate-nodejs-todo-app:latest
+    ports:
+      - "4545:4545"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - todo
+
+  postgres:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "todos"
+    networks:
+      - todo
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - todo
+
+networks:
+  todo:

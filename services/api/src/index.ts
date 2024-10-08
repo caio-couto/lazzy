@@ -5,14 +5,20 @@ import { createServer } from "http";
 import { errorHandler, logger as pino } from "utils";
 import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
-import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
 import helmet from "helmet";
 import pinoHttp from "pino-http";
+import { createClient } from "redis";
 
 const app = express();
 const server = createServer(app);
+
+const client = createClient({
+  url: "redis://lazzy-dev-redis.v19smz.ng.0001.use1.cache.amazonaws.com",
+})
+  .on("error", (err) => console.log("Redis Client Error", err))
+  .connect();
 
 const logger = pinoHttp({
   logger: pino,
@@ -36,7 +42,7 @@ app.use(cors());
 app.use(logger);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World");
+  res.send("Hello AWS ECS Fargate com terraform with redis!!");
 });
 
 app.get("/healthcheck", (req: Request, res: Response) => {
@@ -78,7 +84,14 @@ app.get(
         .from(todos)
         .where(eq(todos.id, req.params.id));
       req.log.info(result);
-      res.status(result.length == 1 ? 200 : 404).json(result);
+      const client = createClient({
+        url: "redis://lazzy-dev-redis.v19smz.ng.0001.use1.cache.amazonaws.com",
+      });
+      await client.connect();
+      const redis = await client.get("todos");
+      res
+        .status(result.length == 1 ? 200 : 404)
+        .json({ result: result, redis: redis });
     } catch (error) {
       next(error);
     }
@@ -89,6 +102,18 @@ app.post(
   "/api/v1/todos",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const client = createClient({
+        url: "redis://lazzy-dev-redis.v19smz.ng.0001.use1.cache.amazonaws.com",
+      });
+      await client.connect();
+      await client.set(
+        "todos",
+        JSON.stringify({
+          task: req.body.task,
+          description: req.body.description,
+        })
+      );
+
       const result = await db
         .insert(todos)
         .values({
@@ -149,7 +174,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 const PORT = process.env.PORT ?? 8081;
 server.listen(PORT, () => {
-  pino.info(`Server is running on port ${PORT}`);
+  pino.info(`Server is running on port: ${PORT}`);
 });
 
 process.on("unhandledRejection", (reason, promise) => {

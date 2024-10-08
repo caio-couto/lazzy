@@ -1,0 +1,5 @@
+bucket = "tfstate-2024-253490784539"
+key = "lazzy/dev/ecr/terraform.tfstate"
+region = "us-east-1"
+profile = "test-terraform-ecs-deploy"
+dynamodb_table = "tflock-tfstate-2024-253490784539"

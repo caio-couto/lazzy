@@ -5,12 +5,7 @@ export default {
   schema: "./src/db/schema.ts",
   out: "./drizzle",
   dbCredentials: {
-    database: "todos",
-    host: "localhost",
-    port: 5432,
-    user: "postgres",
-    password: "password",
-    ssl: false,
+    url: process.env.DATABASE_URL,
   },
   verbose: true,
   dialect: "postgresql",

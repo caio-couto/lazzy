@@ -1,4 +1,4 @@
-@host = http://localhost:4545
+@host = http://lazzy-dev-571511097.us-east-1.elb.amazonaws.com
 
 @baseUrl = {{host}}/api/v1
 
@@ -17,7 +17,7 @@ GET {{baseUrl}}/todos
 Content-Type:  {{contentType}}
 
 ###
-GET {{baseUrl}}/todos/123
+GET {{baseUrl}}/todos/17068774-be2f-4b9f-8f5c-eb33da063a24
 Content-Type:  {{contentType}}
 
 ###
@@ -30,7 +30,7 @@ Content-Type:  {{contentType}}
 }
 
 ###
-PATCH  {{baseUrl}}/todos/b8192f63-2037-4e50-bbe3-2a3e27e8ef84
+PATCH  {{baseUrl}}/todos/e3f55849-8fbc-4639-851c-6f9956626061
 Content-Type:  {{contentType}}
 
 {
@@ -39,5 +39,5 @@ Content-Type:  {{contentType}}
 }
 
 ###
-DELETE  {{baseUrl}}/todos/b8192f63-2037-4e50-bbe3-2a3e27e8ef84
+DELETE  {{baseUrl}}/todos/e3f55849-8fbc-4639-851c-6f9956626061
 Content-Type:  {{contentType}}
